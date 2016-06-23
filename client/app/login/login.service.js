@@ -2,9 +2,8 @@
 
 angular.module('loginApp')
   .service('loginService',['Restangular',  function(Restangular) {
-    Restangular.setBaseUrl('http://medicalassistant-jazzyarchitect.rhcloud.com');   
-   
-
+    Restangular.setBaseUrl('http://medicalassistant-jazzyarchitect.rhcloud.com'); 
+  
     var _all = function() {
         return Restangular.all('api').all('user');
     };
