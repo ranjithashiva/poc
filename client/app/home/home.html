@@ -1,0 +1,215 @@
+<div>
+<header id="header-bar" class="navbar navbar-fixed-top">
+  <div id="search-container"  class="input-group pull-left">  	
+    <input type="text" placeholder="Enter the name of city" aria-describedby="basic-addon1" ng-model="model.cityName" ng-enter="searchByCityName()" style="width : 200px"class="form-control"/>
+    	<button ng-click="searchByCityName()"  class="btn-lg btn-primary" style="margin-top: -8px;">    		
+  			<span aria-hidden="true"  class="fa fa-search cursor-pointer">Search</span>  			
+  		</button>    		
+  </div> 
+  <ul class="nav navbar-nav navbar-right navbar-dropdown">   
+    <li class="dropdown">
+      <div dropdown="" class="col-md-12">
+        <div href="" dropdown-toggle="" class="dropdown-toggle col-md-12 dropdown-display-text"><strong><a ng-click="logout()">Logout</a></strong></div>        
+      </div>
+    </li>
+  </ul>
+</header>
+<div ng-show="showResult" class="facesheet"> 
+  <div class="modal-body">
+    <div class="row" style="margin-top: 64px;">
+      <div class="col-md-4 no-padding">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <span style="color: #337ab7; font-size:17px;">Co-ordinates</span>
+          </div>
+          <div style="padding-left:25px" class="panel-body">
+            <div class="row">
+              <label class="col-md-5"> Longitude </label>
+              <span class="col-md-7">{{weatherInfo.coord.lon}}</span>
+            </div>
+            <div class="row">
+              <label class="col-md-5"> Latitude </label>
+              <span class="col-md-7">{{weatherInfo.coord.lat}}</span>
+            </div>           
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <span style="font-size:17px;">Main</span>
+          </div>
+          <div class="panel-body">
+            <div class="row margin-left-minus-5">
+              <div class="col-md-6 no-padding">
+                <div class="row">
+                  <label class="col-md-7"> Temperature </label>
+                  <span class="col-md-5">{{weatherInfo.main.temp}}</span>
+                </div>
+                <div class="row">
+                  <div class="row-no-margin">
+                    <label class="col-md-7"> Pressure </label>
+                    <span class="col-md-5">{{weatherInfo.main.pressure}}</span>
+                  </div>
+                </div>
+                <div class="row">                    
+                  <div class="row-no-margin">
+                    <label class="col-md-7"> Humidity </label>
+                    <span class="col-md-5">{{weatherInfo.main.humidity}}</span>
+                  </div>
+                </div>
+                <div class="row">  
+                  <div class="row-no-margin">
+                    <label class="col-md-7"> Min Teperature </label>
+                    <span class="col-md-5">{{weatherInfo.main.temp_min}}</span>
+                  </div>
+                </div>
+                <div class="row">   
+                  <div class="row-no-margin">
+                    <label class="col-md-7"> Max Temperature </label>
+                    <span class="col-md-5">{{weatherInfo.main.temp_max}}</span>
+                  </div>
+                </div>
+                <div class="row">  
+                  <div class="row-no-margin">
+                    <label class="col-md-7"> Sea Level </label>
+                    <span class="col-md-5">{{weatherInfo.main.sea_level}}</span>
+                  </div>
+                </div>
+                <div class="row">  
+                  <div class="row-no-margin">
+                    <label class="col-md-7"> Ground Level </label>
+                    <span class="col-md-5">{{weatherInfo.main.grnd_level}}</span>
+                  </div>
+                </div>   
+              </div>              
+            </div>
+          </div>
+        </div> 
+        <div ng-repeat="weather in weatherInfo.weather track by $index">
+          <div class="panel panel-default">
+            <div>
+              <span style="font-size:17px;">Report {{$index + 1}}</span>             
+            </div>
+            <div class="panel-body">
+              <div class="row margin-left-minus-5">
+                <div class="col-md-6 no-padding">
+                  <div class="row">
+                    <label class="col-md-4"> Id </label>
+                    <span class="col-md-6"> {{weather.id}} </span>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label> Main </label>
+                    </div>
+                    <div class="col-md-8 pull-right">
+                      <span> {{weather.main}} </span>
+                    </div>                    
+                  </div>
+                </div>
+                <div class="col-md-6 no-padding">
+                  <div class="row">
+                    <label class="col-md-5">Description </label>
+                    <span class="col-md-7"> {{weather.description}}</span>
+                  </div>
+                  <div class="row">
+                    <label class="col-md-5"> Icon </label>
+                    <span class="col-md-7"> {{weather.icon}}</span>
+                  </div>                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8 no-padding">              
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <span style=" font-size:17px;">Wind</span>
+          </div>
+          <div class="panel-body">
+            <div class="row margin-left-minus-5">
+              <div class="row">
+                <label class="col-md-4">Speed</label>{{weatherInfo.wind.speed}}
+                <!--span.col-md-8 {{facesheet.attendingPhysician}}-->
+              </div>
+              <div class="row">
+                <label class="col-md-4">Degree</label>{{weatherInfo.wind.deg}}
+              </div>             
+            </div>
+          </div>
+        </div>
+        <!-- <div class="panel panel-default">
+          <div class="panel-heading">
+            <span style=" font-size:17px;">Rain</span>
+          </div>
+          <div class="panel-body">
+            <div class="row margin-left-minus-5">
+              <div class="row">
+                <label class="col-md-4">3h</label>{{weatherInfo.rain.3h}}                
+              </div>                           
+            </div>
+          </div>
+        </div> -->
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <span style=" font-size:17px;">Clouds</span>
+          </div>
+          <div class="panel-body">
+            <div class="row margin-left-minus-5">
+              <div class="row">
+                <label class="col-md-4">All</label>{{weatherInfo.clouds.all}}
+                <!--span.col-md-8 {{facesheet.attendingPhysician}}-->
+              </div>                         
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <span style=" font-size:17px;">Sys</span>
+          </div>
+          <div class="panel-body">
+            <div class="row margin-left-minus-5">
+              <div class="row">
+                <label class="col-md-4">Message</label>{{weatherInfo.sys.message}}
+                <!--span.col-md-8 {{facesheet.attendingPhysician}}-->
+              </div>
+              <div class="row">
+                <label class="col-md-4">Country</label>{{weatherInfo.sys.country}}
+              </div>
+              <div class="row">
+                <label class="col-md-4">SunRise</label>{{weatherInfo.sys.sunrise}}
+              </div> 
+              <div class="row">
+                <label class="col-md-4">SunSet</label>{{weatherInfo.sys.sunset}}
+              </div>              
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <!-- {{facesheet.dischargeStatus}} hard coded since it is giving 0-->
+            <label class="col-md-4">ID</label>
+            <span class="col-md-8">{{weatherInfo.id}}</span>
+          </div>
+          <div class="col-md-6">
+            <label class="col-md-4">Name</label>
+            <span class="col-md-8">{{weatherInfo.name }}</span>
+          </div>
+          <div class="col-md-6">
+            <label class="col-md-4">Cod</label>
+            <span class="col-md-8">{{weatherInfo.cod}}</span>
+          </div>
+          <div class="col-md-6">
+            <label class="col-md-4">Dt</label>
+            <span class="col-md-8">{{weatherInfo.dt}}</span>
+          </div>
+          <div class="col-md-6">
+            <label class="col-md-4">Base</label>
+            <span class="col-md-8">{{weatherInfo.base}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
